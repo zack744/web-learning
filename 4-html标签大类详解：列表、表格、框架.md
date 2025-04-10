@@ -8,7 +8,7 @@ title: 4-HTML标签大类详解
 
  - 列表标签：`<ul>`、`<ol>`、`<dl>`
  - 表格标签：`<table>`
- - 框架标签及内嵌框架`<iframe>`
+ - 框架标签及内嵌框架`<iframe>`/`<frame><frameset>`
  - 表单标签：`<form>`
  - 多媒体标签
  - 滚动字幕标签：`<marquee>`
@@ -364,4 +364,217 @@ dt、dd都是容器级标签，想放什么都可以。所以，现在就应该�
 ```css
 style="border-collapse:collapse;"
 ```
+
+### `<tr>`：行
+
+一个表格就是一行一行组成的。
+
+**属性：**
+
+ - `dir`：公有属性，设置这一行单元格内容的排列方式。可以取值：
+ 	- `ltr`：从左到右（left to right，默认）
+	- `rtl`：从右到左（right to left）
+ - `bgcolor`：设置这一行的单元格的背景色。
+注：没有background属性，即：无法设置这一行的背景图片，如果非要设置，可以用css实现。
+ - `height`：一行的高度
+ - `align="center"`：一行的内容水平居中显示，取值：left、center、right
+ - `valign="center"`：一行的内容垂直居中，取值：top、middle、bottom
+
+### `<td>`：单元格
+
+**属性：**
+
+ - `align`：内容的横向对齐方式。属性值可以填：left right center。如果想让每个单元格的内容都居中，这个属性太麻烦了，以后用css来解决。
+ - `valign`：内容的纵向对齐方式。属性值可以填：top middle bottom
+ - `width`：绝对值或者相对值(%)
+ - `height`：单元格的高度
+ - `bgcolor`：设置这个单元格的背景色。
+ - `background`：设置这个单元格的背景图片。
+
+### 单元格的合并
+
+单元格的属性：
+
+- `colspan`：横向合并。例如`colspan="2"`表示当前单元格在水平方向上要占据两个单元格的位置。
+- `rowspan`：纵向合并。例如`rowspan="2"`表示当前单元格在垂直方向上要占据两个单元格的位置。
+
+效果举例：（横向合并）
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_13.png)
+
+效果举例：（纵向合并）
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_15.png)
+
+### `<th>`：加粗的单元格。相当于`<td>` + `<b>`
+
+- 属性同`<td>`标签。
+
+
+
+### `<caption>`：表格的标题。使用时和`tr`标签并列
+
+ - 属性：`align`，表示标题相对于表格的位置。属性取值可以是：left、center、right、top、bottom
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_16.png)
+
+### 表格的`<thead>`标签、`<tbody>`标签、`<tfoot>`标签
+
+这三个标签有与没有的区别：
+
+- 1、如果写了，那么这三个部分的**代码顺序可以任意**，浏览器显示的时候还是按照thead、tbody、tfoot的顺序依次来显示内容。如果不写thead、tbody、tfoot，那么浏览器解析并显示表格内容的时候是从按照代码的从上到下的顺序来显示。
+- 2、当表格非常大内容非常多的时候，如果用thead、tbody、tfoot标签的话，那么**数据可以边获取边显示**。如果不写，则必须等表格的内容全部从服务器获取完成才能显示出来。
+
+举例：
+
+```html
+ <body>
+
+	<table border="1">
+
+		<tbody>
+		<tr>
+			<td>生命壹号</td>
+			<td>23</td>
+			<td>男</td>
+			<td>黄冈</td>
+		</tr>
+		</tbody>
+
+		<tfoot>
+		<tr>
+			<td>许嵩</td>
+			<td>29</td>
+			<td>男</td>
+			<td>安徽</td>
+		</tr>
+		</tfoot>
+
+		<thead>
+		<tr>
+			<td>邓紫棋</td>
+			<td>23</td>
+			<td>女</td>
+			<td>香港</td>
+		</tr>
+		</thead>
+
+	</table>
+
+ </body>
+```
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_17.png)
+
+## 框架标签
+
+如果我们希望在一个网页中显示多个页面，那框架标签就派上用场了。
+> - 注意，框架标签不能放在`<body>`标签里面，因为`<body>`标签代表的只是一个页面，而框架标签代表的是多个页面。于是：`<frameset>`和`<body>`只能二选一。
+> - 框架的集合用`<frameset>`表示，然后在`<frameset>`集合里放入一个一个的框架`<frame>`
+
+**补充**：`frameset`和`frame`已经从 Web标准中删除，建议使用 iframe 代替。
+
+### `<frameset>`：框架的集合
+一个框架的集合可以包含多个框架或框架的集合。
+
+**属性：** 
+- `rows`：水平分割，将框架分为上下部分。写法有两种：
+
+1、绝对值写法：`rows="200,*"`  其中`*`代表剩余的。这里其实包含了两个框架：上面的框架占200个像素，下面的框架占剩下的部分。
+
+2、相对值写法：`rows="30%,*"`  其中`*`代表剩余的。这里其实包含了两个框架：上面的框架占30%，下面的框架占70%。
+
+注：如果你想将框架分成很多行，在属性值里用逗号隔开就行了。
+
+- `cols`：垂直分割，将框架分为左右部分。写法有两种：
+
+1、绝对值写法：`cols="200,*"`  其中`*`代表剩余的。这里其实包含了两个框架：左边的框架占200个像素，右边的框架占剩下的部分。
+
+2、相对值写法：`cols="30%,*"`  其中`*`代表剩余的。这里其实包含了两个框架：左边的框架占30%，右边的框架占70%。
+
+注：如果你想将框架分成很多列，在属性值里用逗号隔开就行了。
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_26.png)
+
+上图中，如果删掉页面right.html，显示效果如下：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_27.png)
+
+### `<frame>`：框架
+
+一个框架显示一个页面。
+
+**属性：**
+
+- `scrolling="no"`：是否需要滚动条。默认值是true。
+- `noresize`：不可以改变框架大小。默认情况下，单个框架的边界是可以拖动的，这样的话，框架大小就不固定了。如果用了这个属性值，框架大小将固定。
+
+举例：
+
+```html
+<frame src="top.html" noresize></frame>
+```
+
+- `bordercolor="#00FF00"`：给框架的边框定义颜色。这个属性在框架集合`<frameset>`中同样适用。
+颜色这个属性在IE浏览器中生效，但是在google浏览器中无效，不知道为啥。
+
+- `frameborder="0"`或`frameborder="1"`：隐藏或显示边框（框架线）。
+
+- `name`：给框架起一个名字。
+
+利用`name`这个属性，我们可以在框架里进行超链。
+
+举例：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_28.png)
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_gif3.gif)
+
+
+## 内嵌框架
+
+内嵌框架用`<iframe>`表示。`<iframe>`是`<body>`的子标记。
+
+内嵌框架inner frame：嵌入在一个页面上的框架(仅仅IE、新版google浏览器支持，可能有其他浏览器也支持，暂时我不清楚)。
+
+**属性：**
+
+ - `src="subframe/the_second.html"`：内嵌的那个页面
+ - `width=800`：宽度
+ - `height=“150`：高度
+ - `scrolling="no"`：是否需要滚动条。默认值是true。
+ - `name="mainFrame"`：窗口名称。公有属性。
+
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_29.png)
+
+内嵌框架举例：（在内嵌页面中切换显示不同的压面）
+
+```html
+ <body>
+
+ 	<a href="文字页面.html" target="myframe">默认显示文字页面</a><br>
+ 	<a href="图片页面.html" target="myframe">点击进入图片页面</a><br>
+ 	<a href="表格页面.html" target="myframe">点击进入表格页面</a><br>
+
+ 	<iframe src="文字页面.html" width="400" height="400" name="myframe"></iframe>
+ 	<br>
+ 	嘿嘿
+
+ </body>
+
+```
+
+效果演示：
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_GIF.gif)
+
 

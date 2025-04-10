@@ -6,12 +6,13 @@ publish: true
 
 ## 本章内容
 `<img>`标签
+
 其相关属性：
-`scr`
-`width` `height`
-`alt`
-`title`
-`align`
+`scr`--来源/地址
+`width` `height`--宽高
+`alt`--无法显示时的解释
+`title`--悬浮解释
+`align`--对齐方式
 
 ## img标签介绍
 
