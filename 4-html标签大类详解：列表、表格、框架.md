@@ -10,8 +10,11 @@ title: 4-HTML标签大类详解
  - 表格标签：`<table>`
  - 框架标签及内嵌框架`<iframe>`/`<frame><frameset>`
  - 表单标签：`<form>`
- - 多媒体标签
- - 滚动字幕标签：`<marquee>`
+ - 语义化框架：`<fieldset>` `<legend>`
+ - 多媒体标签:`<audio>` `<video>` `<embe>` `<object>`
+
+*注：多媒体标签在不同的浏览器中有不同的效果，先跳过后续需要再查询*
+ - 滚动字幕标签：`<marquee>`--过时标签，可以用css+javascript直接实现
 
  ## 列表标签
 
@@ -669,13 +672,8 @@ POST方式：
 ![](http://img.smyhvae.com/2015-10-02-cnblogs_html_33.png)
 注意，多个单选框的input标签中，name 的属性值可以相同，但是 **id 的属性值必须是唯一的**。我们知道，html的标签中，id的属性值是唯一的。
 >注意：
-1.在HTML表单中，单选按钮`<input type="radio">`的行为是由它们的`name`属性决定的。具有相同`name`属性的单选按钮会形成一个组，用户只能在这个组中选择一个。
-2.这里其实还少了一个`<label>`标签
-`<label>`标签有几个重要的作用：
-增强可读性：通过关联文本和表单控件，使代码更易于理解和维护。
-提高可访问性：让屏幕阅读器能够识别和读取表单控件的描述，帮助有视觉障碍的用户。
-点击区域扩展：用户点击`<label>`标签时，会自动聚焦到关联的表单控件，提升用户体验。
-效果：
+1.在HTML表单中，单选按钮`<input type="radio">`的行为是由它们的`name`属性决定的。具有相同`name`属性的单选按钮会形成一个组，用户只能在这个组中选择一个。无论位置放到哪，一个组中的作用关系不变。
+
 
 
 
@@ -699,3 +697,296 @@ POST方式：
 效果：
 
 ![](http://img.smyhvae.com/2015-10-02-cnblogs_html_35.png)
+
+### `<select>`：下拉列表标签
+
+`<select>`标签里面的每一项用`<option>`表示。select就是“选择”，option“选项”。
+
+select标签和ul、ol、dl一样，都是组标签。
+
+**`<select>`标签的属性：**
+
+- `multiple`：可以对下拉列表中的选项进行多选。属性值为 multiple，也可以没有属性值。也就是说，既可以写成 `multiple=""`，也可以写成`multiple="multiple"`。
+- `size="3"`：如果属性值大于1，则列表为滚动视图。默认属性值为1，即下拉视图。
+
+**`<option>`标签的属性：**
+
+ - `selected`：预选中。没有属性值。
+
+举例：
+
+```html
+	<form>
+		<select>
+			<option>小学</option>
+			<option>初中</option>
+			<option>高中</option>
+			<option>大学</option>
+			<option selected="">研究生</option>
+		</select>
+		<br><br><br>
+
+		<select size="3">
+			<option>小学</option>
+			<option>初中</option>
+			<option>高中</option>
+			<option>大学</option>
+			<option>研究生</option>
+		</select>
+		<br><br><br>
+
+		<select multiple="">
+			<option>小学</option>
+			<option>初中</option>
+			<option selected="">高中</option>
+			<option selected="">大学</option>
+			<option>研究生</option>
+		</select>
+		<br><br><br>
+
+	</form>
+```
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_32.png)
+
+### `<textarea>`标签：多行文本输入框
+
+text 就是“文本”，area 就是“区域”。
+
+**属性：**
+
+ - `rows="4"`：指定文本区域的行数。
+ - `cols="20"`：指定文本区域的列数。
+ - `readonly`：只读。
+
+举例：
+
+```html
+	<form>
+		<textarea name="txtInfo" rows="4" cols="20">1、不爱摄影不懂设计的程序猿不是一个好的产品经理。</textarea>
+	</form>
+```
+
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_34.png)
+
+上图的红框部分表示，我在文本区域进行了换行，所以显示的效果也出现了空白。
+
+
+
+### 表单的语义化
+
+比如，我们在注册一个网站的信息的时候，有一部分是必填信息，有一部分是选填信息，这个时候可以利用表单的语义化。
+举例：
+
+```html
+	<form>
+
+		<fieldset>
+		<legend>账号信息</legend>
+		姓名：<input value="呵呵" >逗比<br>
+		密码：<input type="password" value="pwd" size="50"><br>
+		</fieldset>
+
+		<fieldset>
+		<legend>其他信息</legend>
+		性别：<input type="radio" name="gender" value="male" checked="">男
+			  <input type="radio" name="gender" value="female" >女<br>
+		爱好：<input type="checkbox" name="love" value="eat">吃饭
+			  <input type="checkbox" name="love" value="sleep">睡觉
+			  <input type="checkbox" name="love" value="bat">打豆豆
+		</fieldset>
+
+	</form>
+```
+
+效果：
+
+
+![](http://img.smyhvae.com/20151002_36.png)
+
+### `<label>`标签
+
+我们先来看下面一段代码：
+
+```html
+<input type="radio" name="sex" /> 男
+<input type="radio" name="sex" /> 女
+
+```
+
+对于上面这样的单选框，我们只有点击那个单选框（小圆圈）才可以选中，点击“男”、“女”这两个文字时是无法选中的；于是，label标签派上了用场。
+
+本质上来讲，“男”、“女”这两个文字和input标签时没有关系的，而label就是解决这个问题的。我们可以通过label把input和汉字包裹起来作为整体。
+
+解决方法如下：
+
+```html
+<input type="radio" name="sex" id="nan" /> <label for="nan">男</label>
+<input type="radio" name="sex" id="nv"  /> <label for="nv">女</label>
+```
+
+上方代码中，让label标签的**for 属性值**，和 input 标签的 **id 属性值相同**，那么这个label和input就有绑定关系了。
+
+
+当然了，复选框也有label：（任何表单元素都有label）
+
+```html
+<input type="checkbox" id="kk" />
+<label for="kk">10天内免登陆</label>
+```
+
+## 多媒体标签
+
+**声明：**
+多媒体包含：音频、视频、Flash。网页上的多媒体基本都是Flash格式的。
+.wmv、.dat、.mob、.rmvb等视频格式，在网页上不能直接播放，需要安装第三方的插件，才可以播放。不同的浏览器，播客上述视频格式，所使用插件参数又不一样。
+上述格式视频一般文件较大，不利于网络下载播放。
+一般情况下，是将其它的视频格式，转成Flash来在网页上播放。转换软件：格式工厂等。
+Flash格式的视频兼容性非常好，Flash格式的文件很小。
+
+### `<bgsound>`标签：播放背景音乐
+**属性：**
+ - `src="音乐文件的路径"`
+ - `loop="-1"`：属性值代表播放次数，-1代表循环播放。
+
+举例：
+```html
+ <body>
+	<bgsound src="王菲 - 清风徐来.mp3"></bgsound>
+ </body>
+
+```
+运行效果：
+打开网页后，在IE 8中播放正常，播放时网页上显示一片空白。在google浏览器中无法播放。
+注意，在现代浏览器中此标签不常用。一般使用`<audio>`标签内嵌音频。
+- `<audio>`标签：用于在网页中嵌入音频文件。
+- autoplay属性：音频将在页面加载时自动播放。
+- loop属性：音频将循环播放。
+
+### `<embed>`标签：播放多媒体文件（音频、视频等）
+主要应用Netscape浏览器，它不是W3C规范。
+
+ > 备注：视频格式可以支持 mp4、wav等，但不是所有视频格式都支持。
+
+**属性：**
+ - `src="多媒体文件的路径"`
+ - `loop="-1"`：属性值代表播放次数，-1代表循环播放。
+ - `autostart="false"`：打开网页时，禁止自动播放。默认值是true。
+ - `volume="100"`：设置默认的音量大小，测试发现这个值好像不起作用哦。
+ - width：指Flash文件的宽度
+ - height：指Flash文件的高度
+ - quality：指Flash的播放质量，质量有高有低 hight  low
+ - pluginspage：如果指定的Flash插件不存在，则从pluginspage指定的地方进行下载。
+ - type：指定Flash的文件格式类型
+ - wmode：指Flash的背景是否可以透明，取值：transparent是透明的
+
+`<embed>`标签播放音频举例：
+```html
+ <body>
+	<embed src="王菲 - 清风徐来.mp3"></embed>
+ </body>
+
+```
+IE 8中的运行效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_37.png)
+
+google浏览器中的运行效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_38.png)
+
+注：在HTML5中新增了`<video>`标签播放视频。
+
+### `<object>`标签：播放多媒体文件（音频、视频等）
+
+主要应用IE浏览器，它是W3C规范。
+
+**属性：**
+ - `classid`：指定Flash插件的ID号，一般存在于注册表中。
+ - `codebase`：如果Flash插件不存在，则从codebase指定的地址下载。
+ - `<param>`标签的主要作用：设置具体的详细参数。
+
+**总结：在网页中插入Flash时，为了同时兼容多种浏览器，需要将`<object>`标签和`<embed>`标签标记一起使用，但使用的顺序是：`<object>`中嵌套`<embed>`标记。**
+举例：
+
+```html
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="778" height="202">
+  <param name="movie" value="images/banner.swf">
+  <param name="quality" value="high">
+  <param name="wmode" value="transparent">
+  <embed src="images/banner.swf" width="778" height="202" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent"></embed>
+</object>
+```
+
+## `<marquee>`：滚动字幕标签
+
+如果在这个标签里设置了内容，那么，打开网页时，内容会像弹幕一样自动移动。
+**属性：**
+ - `direction="right"`：移动的目标方向。属性值可以是：`left`（从右向左移动，默认值）、`right`（从左向右移动）、`up`（从下向上移动）、`down`（从上向下移动）。
+
+ - `behavior="slide"`：行为方式。属性值可以是：`slide`（只移动一次）、`scroll`（循环移动，默认值）、`alternate`（循环移动）、。
+`alternate`和`scroll`属性值都是循环移动，区别在于：假设在`direction="right"`的情况下，`behavior="scroll"`表示从左到右、从左到右、从左到右···`behavior="alternate"`表示从左到右、从右到左、从左到右···
+
+ - `scrollamount="30"`：移动的速度
+ - `loop="3"`: 循环多少圈。负值表示无限循环
+ - `scrolldelay="1000"`：移动一次休息多长时间。单位是毫秒。
+
+举例：
+```html
+	<marquee behavior="alternate" direction="down"  width="300" height="200" bgcolor="#8c5dc1">我来了</marquee>
+```
+
+效果：
+
+![](http://img.smyhvae.com/2015-10-02-cnblogs_html_04.gif)
+
+## html废弃标签介绍
+
+HTML现在只负责语义，而不负责样式。但是HTML一开始，连样式也包办了。这些样式的标签，都已经被废弃。
+
+2004年之前的东西：
+
+```html
+<font size="9" color="red">哈哈</font>
+```
+
+下面这些标签都是css钩子，而不是原意：
+
+```html
+	<b>加粗</b>
+	<u>下划线</u>
+	<i>倾斜</i>
+    <del>删除线</del>
+	<em>强调</em>
+	<strong>强调</strong>
+
+```
+
+这些标签，是有着浓厚的样式的作用，干涉了css的作用，所以HTML抛弃了他们。
+
+类似的还有水平线标签：
+
+```html
+<hr />
+```
+
+换行标签：
+
+```
+<br />
+```
+
+但是，网页中99.9999%需要换行的时候，是因为另起了一个段落，所以要用p，而不要用`<br />`。不到万不得已，不要用br标签。
+
+标准的div+css页面，只会用到种类很少的标签：
+
+```
+div  p  h1  span   a   img   ul   ol    dl    input
+```
+
+知道每个标签的特殊用法、属性。比如a标签，img的属性。
