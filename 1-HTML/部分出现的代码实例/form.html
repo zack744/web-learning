@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="" name="person">
+            <fieldset disabled="disabled">
+                <legend>账号信息</legend>
+            name:      <input value="无敌">逆天<br>
+            nickname:  <input value="dudu" readonly><br>
+            last name: <input type="text" value="haha" disabled><br>
+            password:  <input type="password" value="pwd" size="6"><br>
+            </fieldset>
+            <fieldset>
+                <legend>其他信息</legend>
+            sex:       <input type="radio" name="gender" id="radio1" value="male" checked>man 
+                       <input type="radio" name="gender" id="radio2" value="female">woman <br>
+            interest:  <input type="checkbox" name="love" id="eat">eat
+                        <input type="radio" name="gender" id="radio3" value="fele">one <br>
+                       <input type="checkbox" name="love" id="sleep">sleep
+                       <input type="checkbox" name="love" id="hut">hut
+            </fieldset>
+            
+        </form>
+    </div>
+    <hr>
+  
+    <div hidden>
+        <form>
+            <input type="button" value="普通按钮"><br>
+            <input type="submit"  value="提交按钮"><br>
+            <input type="reset" value="重置按钮"><br>
+            <input type="image" value="图片按钮1"><br>
+            <input type="image" src="images/5.jpg" width="500" height="500" value="图片按钮2"><br>
+            <input type="file" value="文件选择框">
+        </form>
+    </div>
+
+    <div >
+        <form>
+            <select>
+                <option>小学</option>
+			    <option>初中</option>
+			    <option>高中</option>
+			    <option>大学</option>
+                <option selected="">大学</option>
+            </select>
+            <br><br><br>
+
+            <select size="2">
+                <option>小学</option>
+			    <option>初中</option>
+			    <option>高中</option>
+			    <option>大学</option>
+                <option>大学</option>
+            </select>
+            <br><br><br>
+
+            <select multiple="3" >
+                <option>小学</option>
+			    <option>初中</option>
+			    <option selected>高中</option>
+			    <option selected>大学</option>
+                <option>大学</option>
+            </select>
+
+        </form>
+           
+    </div>
+
+    <div hidden>
+        <textarea name="txtinfo" rows="4" cols="20">努力，为了你自己</textarea>
+        <textarea name="txtinfo" rows="4" cols="20">
+            努力，为了你自己</textarea>
+        <textarea name="txtinfo" rows="4" cols="20">
+            
+            努力，为了你自己</textarea>
+    </div>
+
+    <div>
+        <form hidden>
+            <input type="radio" name="sex" id="man" /> <label for="man">男</label>
+            <input type="radio" name="sex" id="woman" /> <label for="woman">女</label>
+            <input type="checkbox" id="kk" />
+            <label for="kk">10天内免登陆</label>
+        </form>
+    </div>
+
+    <div>
+        <input type="text" list="myData">
+        <datalist id="myData">
+            <option>本科</option>
+            <option>研究生</option>
+            <option>不明</option>
+        </datalist>
+    </div>
+   
+</body>
+</html>
